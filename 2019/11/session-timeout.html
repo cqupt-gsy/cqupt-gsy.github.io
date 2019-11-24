@@ -8,7 +8,7 @@
 
             <meta name="google-site-verification" content="GTo_mpNjSHa46yUCksCf_wo4KzjaAdD45koZAN4bpPw">
 
-        <title>分布式系统-缘起</title>
+        <title>深入理解因集群导致的session timeout</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/theme/css/bootstrap.min.css" rel="stylesheet">
@@ -34,26 +34,27 @@
 
 
 
-        <meta name="description" content="大家都知道，分布式系统提高了我们计算系统的计算能力，让更多的不可能变为了可能。但是它是如何做到这些，以及我们为什么要设计分布式系统，分布式系统的核心是什么，这些问题并不是很好的被大家所认知，所以本系列文章尝试用通俗易懂的语言，给想要了解分布式系统的各位一个简单明了的介绍。">
+        <meta name="description" content="当服务端使用集群时，客户端经常发生session timeout的问题。本文经过分析浏览器处理session的方式，从本质上分析问题的源头以及给出对应的解决方案，希望以后再遇到类似的问题时，能够快速解决。">
 
         <meta name="author" content="Apprentice">
 
-        <meta name="tags" content="分布式系统">
+        <meta name="tags" content="java-web">
+        <meta name="tags" content="session">
 
 	                <meta property="og:locale" content="">
 		<meta property="og:site_name" content="Apprentice">
 
 	<meta property="og:type" content="article">
             <meta property="article:author" content="/author/apprentice">
-	<meta property="og:url" content="/2019/11/beginning.html">
-	<meta property="og:title" content="分布式系统-缘起">
-	<meta property="article:published_time" content="2019-11-23 23:57:00+08:00">
-            <meta property="og:description" content="大家都知道，分布式系统提高了我们计算系统的计算能力，让更多的不可能变为了可能。但是它是如何做到这些，以及我们为什么要设计分布式系统，分布式系统的核心是什么，这些问题并不是很好的被大家所认知，所以本系列文章尝试用通俗易懂的语言，给想要了解分布式系统的各位一个简单明了的介绍。">
+	<meta property="og:url" content="/2019/11/session-timeout.html">
+	<meta property="og:title" content="深入理解因集群导致的session timeout">
+	<meta property="article:published_time" content="2019-11-25 19:23:00+08:00">
+            <meta property="og:description" content="当服务端使用集群时，客户端经常发生session timeout的问题。本文经过分析浏览器处理session的方式，从本质上分析问题的源头以及给出对应的解决方案，希望以后再遇到类似的问题时，能够快速解决。">
 
             <meta property="og:image" content="/theme/images/post-bg.jpg">
 </head>
 
-<body class="article-beginning">
+<body class="article-session-timeout">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -87,12 +88,12 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>分布式系统-缘起</h1>
+                        <h1>深入理解因集群导致的session timeout</h1>
                         <span class="meta">Posted by
                                 <a href="/author/apprentice">Apprentice</a>
-                             on Sat 23 November 2019
+                             on Mon 25 November 2019
                         </span>
-                            <span class="meta">Updated on Sat 23 November 2019</span>
+                            <span class="meta">Updated on Mon 25 November 2019</span>
                         
                     </div>
                 </div>
@@ -106,31 +107,51 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
     <!-- Post Content -->
     <article>
-        <h3>前言</h3>
-<p>大家都知道，分布式系统提高了我们计算系统的计算能力，让更多的不可能变为了可能。但是它是如何做到这些，以及我们为什么要设计分布式系统，分布式系统的核心是什么，这些问题并不是很好的被大家所认知，所以本系列文章尝试用通俗易懂的语言，给想要了解分布式系统的各位一个简单明了的介绍。</p>
-<h3>开篇-为什么</h3>
-<p>计算机帮助人类完成计算任务，大都是一系列重复的、计算量大的任务。而早期计算机刚出现时，计算能力非常有限，导致人们也不得不选取一些比较简单的计算任务让计算机完成。随着时间的推移，计算机硬件的迭代更新速度发展非常迅猛，使得计算机可以完成更多的计算任务，尤其是当互联网的出现，让人们对计算机应用的需求急剧增加。</p>
-<p>这个时候我们可以分析一下，计算机本质就是通过CPU和内存协调，快速运算完成指定的计算任务。当计算任务变大以后（大并发场景的出现），我们可以提高CPU和内存来应对。因此，我们出现了大型机，来保障在互联网时期的应用需求。但是大型机的成本很高，而且经过长时间的分析，每个互联网应用，并不是所有的功能都需要这么多资源来应对大并发，甚至有的功能上线后就没什么人用。这个时候为了应对不同功能的并发需求，我们就需要拆分应用了，我们得把一个完整的应用拆分成很多个服务，并且每个服务都是一个独立的应用。这样就可以给核心服务分配更多的资源以应对更大的并发，而非核心模块就可以适当的”冷藏“起来。</p>
-<p>所以分布式系统就出现了，包括但不限于分布式服务，分布式数据库等等。分布式系统本质就是一群相互协作的计算机对外提供完整的服务，以至于从外部观察，整个分布式系统是一个完整体。</p>
-<p><img alt="单体应用与分布式系统应用" src="/images/distributed-system/fen-bu-shi-xi-tong-ying-yong.png"></p>
-<h3>初识分布式系统</h3>
-<p>在了解了为什么要使用分布式系统后，我们来简单的看看什么是分布式系统。我们从几个维度来讲：</p>
-<p><strong>组织形式：</strong>平时我们接触最多的分布式系统就是Web应用，将Web应用拆分成分布式服务，每个服务提供特定的功能，例如：订单服务、支付服务、积分服务等等。每个服务都是一个独立的应用，能够提供一套完备功能。将所有服务的功能合并，就是一个完整的Web应用。这些被拆分的服务拥有一个统一的专业名词——微服务。</p>
-<p>除了Web应用外，还有分布式计算应用，分布式存储应用，其核心是将大而复杂的任务拆分给不同的计算或者存储节点，保证无法在单机完成的任务，能够通过分而治之的思想完成。</p>
-<p><strong>通信方式：</strong></p>
+        <h3>问题的表象</h3>
+<ol>
+<li>在浏览器A子标签中访问站点首页导航，并点击进入子页面，建立浏览器与服务器的session</li>
+<li>在同一个浏览器中打开第二个、第三个、第四个子标签访问子页面，并进行相关操作，操作时间必须超过第一个子标签在服务器的session timeout时间</li>
+<li>打开第五个子标签访问站点首页，这时出现一进入站点就出现session timeout</li>
+<li>服务端集群有两台机器</li>
+</ol>
+<h3>分析思路</h3>
+<ol>
+<li>针对问题，监控两台服务器的流量，发现在第一个标签页打开时，浏览器与服务器A建立了连接，并创建了sessionA</li>
+<li>接下来的第二个、第三个、第四个子标签被打开时，浏览器与服务器B建立了连接，使用的也是sessionA。此时，所有在第2-4个子标签的操作，都是在刷新sessionA在服务器B的session timeout</li>
+<li>当打开第五个标签页时，浏览器与服务器A建立的连接，还是使用的是sessionA，但是此时sessionA在服务器A上早已经超时，所以当用户第一次打开网站就会报session timeout的错误提示</li>
+</ol>
+<h3>问题的本质</h3>
+<ol>
+<li>一个浏览器窗口是共享session的，也就是说，打开一个浏览器进程，不管你开多少子标签页，他们都是共享session的。所以当服务器端是个集群，并且没有根据session做负载均衡时，流量会被随机转到不同的服务器上，一旦发生上述场景，就会出现用新标签也打开网站就报session timeout的问题</li>
+<li>不同的浏览器进程之间是不共享session的，也就是session是跟浏览器进程相关，一个进程获得一个session。这点就是说，当我们新开一个浏览器窗口时，要重新登录，新的浏览器进程需要与服务端重新建立session连接</li>
+<li>服务器集群之间的服务器是不共享session的</li>
+</ol>
+<h3>解决思路</h3>
+<ol>
+<li>如果是非生产环境，可是将服务器集群的机器数量减少到1台，但是这个思路治标不治本，并且由于生产环境与非生产环境出现了不一致，很容易让我们忘记在生产环境还要额外的session配置，导致上线失败，因此不推荐（除非生产环境也只用一台机器）</li>
+<li>session共享、session同步，保证服务器集群之间的session一致。在负载均衡器中添加session stickness的机制，保障负载均衡的流量转发是要跟session绑定的，也就是说如果sessionA是服务器A保存的，那么所有sessionA的流量全部要导到服务器A。<blockquote>
+<p>但是该方法使得服务器集群失去了动态扩容的优势，极端情况下，当session全部是在一台服务器创建时，就会导致那台服务器响应不过来。因此该方法只有在遗留系统中推荐使用，如果是全新的项目不推荐</p>
+</blockquote>
+</li>
+<li>使用JWT token，消除session，让服务器完全无状态，这样就不会出现session timeout的问题了。推荐使用</li>
+</ol>
+<h3>关于session的题外话</h3>
+<ol>
+<li>session在何时被创建：一个常见的误解是以为session在有客户端访问时就被创建，然而事实是直到某server端程序调用HttpServletRequest.getSession(true)这样的语句时才被创建，注意如果JSP没有显示的使用 &lt;%@page session="false"%&gt;关闭session，则JSP文件在编译成Servlet时将会自动加上这样一条语句HttpSession session = HttpServletRequest.getSession(true);这也是JSP中隐含的session对象的来历。由于session会消耗内存资源，因此，如果不打算使用session，应该在所有的JSP中关闭它。</li>
+<li>session何时被删除：<blockquote>
 <ul>
-<li>进程间通信：操作系统进程之间的通信、Socket通信等等</li>
-<li>客户端-服务端通信：HTTP协议通信，RPC、RMI通信等等，微服务常用通信模式</li>
-<li>间接通信：发布-订阅通信模式、消息队列通信模式等等，SOA常用通信模式</li>
+<li>程序调用HttpSession.invalidate()</li>
+<li>距离上一次收到客户端发送的session id时间间隔超过了session的超时设置</li>
+<li>服务器进程被停止（非持久session）。</li>
 </ul>
-<p><strong>分层架构：</strong>将应用垂直划分为应用层、中间件层、基础系统层。同时还可以为每层进行水平划分，例如应用层可以分为UI层，BFF层，领域层，数据层等等。每层都由多个服务组成。</p>
-<h3>结语</h3>
-<p>到目前为止，我们知道了，设计分布式系统就是为了应对大并发的场景，并且还可以通过给不同的服务协调不同的资源，以最小硬件资源抗住最大的计算任务（大并发）。同时，我们还了解分布式系统的架构、组织形式以及常用的通信模式。</p>
-<p>接下来，我们将会进一步介绍如何构建分布式系统，怎样才能够让这些分布式服务共同协作工作。</p>
+</blockquote>
+</li>
+<li>如何做到在浏览器关闭时删除session：严格的讲，做不到这一点。可以做一点努力的办法是在所有的客户端页面里使用javascript代码window.oncolose来监视浏览器的关闭动作，然后向服务器发送一个请求来删除session。但是对于浏览器崩溃或者强行杀死进程这些非常规手段仍然无能为力。</li>
+</ol>
     </article>
 
         <div class="tags">
-            <p>tags: <a href="/tag/fen-bu-shi-xi-tong">分布式系统</a></p>
+            <p>tags: <a href="/tag/java-web">java-web</a>, <a href="/tag/session">session</a></p>
         </div>
 
     <hr>
