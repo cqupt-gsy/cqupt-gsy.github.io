@@ -169,11 +169,9 @@
 <ol>
 <li>session在何时被创建：一个常见的误解是以为session在有客户端访问时就被创建，然而事实是直到某server端程序调用HttpServletRequest.getSession(true)这样的语句时才被创建，注意如果JSP没有显示的使用 &lt;%@page session="false"%&gt;关闭session，则JSP文件在编译成Servlet时将会自动加上这样一条语句HttpSession session = HttpServletRequest.getSession(true);这也是JSP中隐含的session对象的来历。由于session会消耗内存资源，因此，如果不打算使用session，应该在所有的JSP中关闭它。</li>
 <li>session何时被删除：<blockquote>
-<ul>
-<li>程序调用HttpSession.invalidate()</li>
-<li>距离上一次收到客户端发送的session id时间间隔超过了session的超时设置</li>
-<li>服务器进程被停止（非持久session）。</li>
-</ul>
+<p>程序调用HttpSession.invalidate()
+距离上一次收到客户端发送的session id时间间隔超过了session的超时设置
+服务器进程被停止（非持久session）。</p>
 </blockquote>
 </li>
 <li>如何做到在浏览器关闭时删除session：严格的讲，做不到这一点。可以做一点努力的办法是在所有的客户端页面里使用javascript代码window.oncolose来监视浏览器的关闭动作，然后向服务器发送一个请求来删除session。但是对于浏览器崩溃或者强行杀死进程这些非常规手段仍然无能为力。</li>
@@ -199,6 +197,22 @@
 
                 <div class="clear"></div>
 
+                <aside class="post-author">
+
+
+                        <figure class="post-author-avatar">
+                            <img src="/favicon.ico" alt="Apprentice" />
+                        </figure>
+                    <div class="post-author-bio">
+                        <h4 class="post-author-name"><a href="/author/apprentice">Apprentice</a></h4>
+                            <p class="post-author-about">聚焦科技、热衷实践、记录不平凡的技术生活</p>
+                            <span class="post-author-location"><i class="ic ic-location"></i> China</span>
+                            <span class="post-author-website"><a href="mailto:gaosy.work@gmail.com"><i class="ic ic-link"></i> Website</a></span>
+                        <!-- Social linkes in alphabet order. -->
+                            <span class="post-author-github"><a target="_blank" href="https://github.com/cqupt-gsy"><i class="ic ic-link"></i> GitHub</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </aside>
 
                 </section>
 
