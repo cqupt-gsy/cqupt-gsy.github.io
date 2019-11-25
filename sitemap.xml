@@ -4,105 +4,105 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>/</loc>
-<lastmod>2019-11-25T16:04:52-00:00</lastmod>
+<loc>https://cqupt-gsy.github.io/</loc>
+<lastmod>2019-11-25T17:13:49-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/archives.html</loc>
-<lastmod>2019-11-25T16:04:52-00:00</lastmod>
+<loc>https://cqupt-gsy.github.io/archives.html</loc>
+<lastmod>2019-11-25T17:13:49-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tags.html</loc>
-<lastmod>2019-11-25T16:04:52-00:00</lastmod>
+<loc>https://cqupt-gsy.github.io/tags.html</loc>
+<lastmod>2019-11-25T17:13:49-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/pages/profiles/</loc>
+<loc>https://cqupt-gsy.github.io/pages/profiles/</loc>
 <lastmod>2019-11-24T00:30:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/2019/11/session-timeout.html</loc>
+<loc>https://cqupt-gsy.github.io/2019/11/session-timeout.html</loc>
 <lastmod>2019-11-25T19:23:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/2019/11/efficient-google.html</loc>
+<loc>https://cqupt-gsy.github.io/2019/11/efficient-google.html</loc>
 <lastmod>2019-11-24T17:23:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/2019/11/beginning.html</loc>
+<loc>https://cqupt-gsy.github.io/2019/11/beginning.html</loc>
 <lastmod>2019-11-23T23:57:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/category/distributed-system</loc>
+<loc>https://cqupt-gsy.github.io/category/distributed-system</loc>
 <lastmod>2019-11-23T23:57:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/category/java-web</loc>
+<loc>https://cqupt-gsy.github.io/category/java-web</loc>
 <lastmod>2019-11-25T19:23:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/category/tool-tips</loc>
+<loc>https://cqupt-gsy.github.io/category/tool-tips</loc>
 <lastmod>2019-11-24T17:23:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/java-web</loc>
+<loc>https://cqupt-gsy.github.io/tag/java-web</loc>
 <lastmod>2019-11-25T19:23:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/session</loc>
+<loc>https://cqupt-gsy.github.io/tag/session</loc>
 <lastmod>2019-11-25T19:23:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/tool-tips</loc>
+<loc>https://cqupt-gsy.github.io/tag/tool-tips</loc>
 <lastmod>2019-11-24T17:23:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/distributed-system</loc>
+<loc>https://cqupt-gsy.github.io/tag/distributed-system</loc>
 <lastmod>2019-11-23T23:57:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/author/apprentice</loc>
+<loc>https://cqupt-gsy.github.io/author/apprentice</loc>
 <lastmod>2019-11-25T19:23:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
