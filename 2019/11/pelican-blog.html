@@ -15,13 +15,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="origin" />
   <meta name="generator" content="Pelican" />
-<link href="http://localhost:8000/2019/11/pelican-blog.html" rel="canonical" />
+<link href="https://cqupt-gsy.github.io/2019/11/pelican-blog.html" rel="canonical" />
   <!-- Feed -->
 
-  <link href="http://localhost:8000/theme/css/style.css" type="text/css" rel="stylesheet" />
+  <link href="https://cqupt-gsy.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
 
   <!-- Code highlight color scheme -->
-      <link href="http://localhost:8000/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
+      <link href="https://cqupt-gsy.github.io/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
 
 
   <!-- Custom fonts -->
@@ -52,15 +52,15 @@
 <meta property="og:title" content="基于pelican和github pages，搭建个人博客站点"/>
 <meta property="og:description" content="如何利用pelican搭建私人的博客网站，并通过github pages发布是本文的重点内容。本文将分步骤详细介绍使用pelican搭建博客的过程，以及在搭建博客过程中可能出现的坑。希望能给其他同学一些避坑指南。"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://localhost:8000/2019/11/pelican-blog.html"/>
+<meta property="og:url" content="https://cqupt-gsy.github.io/2019/11/pelican-blog.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-11-27 00:00:00+08:00"/>
 <meta property="article:modified_time" content="2019-11-27 00:00:00+08:00"/>
-<meta property="article:author" content="http://localhost:8000/author/apprentice">
+<meta property="article:author" content="https://cqupt-gsy.github.io/author/apprentice">
 <meta property="article:section" content="python"/>
 <meta property="article:tag" content="pelican"/>
 <meta property="article:tag" content="github pages"/>
-<meta property="og:image" content="http://localhost:8000/images/header-cover/home-bg.jpg">
+<meta property="og:image" content="https://cqupt-gsy.github.io/images/header-cover/home-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -75,10 +75,10 @@
   "author": {
     "@type": "Person",
     "name": "Apprentice",
-    "url": "http://localhost:8000/author/apprentice"
+    "url": "https://cqupt-gsy.github.io/author/apprentice"
   },
-  "image": "http://localhost:8000/images/header-cover/home-bg.jpg",
-  "url": "http://localhost:8000/2019/11/pelican-blog.html",
+  "image": "https://cqupt-gsy.github.io/images/header-cover/home-bg.jpg",
+  "url": "https://cqupt-gsy.github.io/2019/11/pelican-blog.html",
   "description": "如何利用pelican搭建私人的博客网站，并通过github pages发布是本文的重点内容。本文将分步骤详细介绍使用pelican搭建博客的过程，以及在搭建博客过程中可能出现的坑。希望能给其他同学一些避坑指南。"
 }
 </script>
@@ -93,9 +93,8 @@
     <ul>
           <li><a href="/archives.html" role="presentation">Archives</a></li>
           <li><a href="/catgegories.html" role="presentation">Categories</a></li>
-          <li><a href="/tags.html" role="presentation">Tags</a></li>
 
-              <li role="presentation"><a href="http://localhost:8000/pages/profiles/">Profiles</a></li>
+              <li role="presentation"><a href="https://cqupt-gsy.github.io/pages/profiles/">Profiles</a></li>
 
     </ul>
   </div>
@@ -111,7 +110,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="http://localhost:8000/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="https://cqupt-gsy.github.io/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -120,7 +119,7 @@
         <h1 class="post-title">基于pelican和github pages，搭建个人博客站点</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="http://localhost:8000/author/apprentice">Apprentice</a>
+                <a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a>
             | <time datetime="27 Nov 2019">27 Nov 2019</time>
         </span>
         <!-- TODO : Modified check -->
@@ -204,11 +203,11 @@
 <li>最后，重新生成博客，启动服务查看插件效果（如何生成博客、启动服务，后面会介绍）</li>
 </ul>
 <h4>评论组件配置</h4>
-<p>给博客添加评论功能，让别人可以评论你的博客，本文介绍disqus评论组件的配置。</p>
+<p>给博客添加评论功能，让别人可以评论你的博客，本文介绍disqus评论组件的配置。<strong>主要该组件只能在服务端生效。</strong></p>
 <ul>
 <li>首先到<a href="https://disqus.com/">disqus</a>注册账号，并且获取你的<code>SITE_CODE</code></li>
 <li>在<code>pelicanconf.py</code>中添加配置<code>DISQUS_SITENAME = "SITE_CODE"</code></li>
-<li>最关键的，如果想让你的评论组件生效，添加配置<code>SITEURL = '你博客站点的根域名'</code>，<strong>一定不能把这个配置留空</strong></li>
+<li>最关键的，如果想让你的评论组件生效，添加配置<code>SITEURL = '你博客站点的根域名'</code>，<strong>一定不能把这个配置留空，如果是本地调试可以留空，但是一旦发布到服务端，一定要填写</strong></li>
 <li>最后，重新生成博客，启动服务查看配置效果（如何生成博客、启动服务，后面会介绍）</li>
 </ul>
 <h4>谷歌分析配置</h4>
@@ -267,20 +266,20 @@
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=基于pelican和github pages，搭建个人博客站点&amp;url=http://localhost:8000/2019/11/pelican-blog.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=基于pelican和github pages，搭建个人博客站点&amp;url=https://cqupt-gsy.github.io/2019/11/pelican-blog.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:8000/2019/11/pelican-blog.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://cqupt-gsy.github.io/2019/11/pelican-blog.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=http://localhost:8000/2019/11/pelican-blog.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://cqupt-gsy.github.io/2019/11/pelican-blog.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="http://localhost:8000/tag/pelican">pelican</a><a href="http://localhost:8000/tag/github-pages">github pages</a>                </aside>
+<a href="https://cqupt-gsy.github.io/tag/pelican">pelican</a><a href="https://cqupt-gsy.github.io/tag/github-pages">github pages</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -288,10 +287,10 @@
 
 
                         <figure class="post-author-avatar">
-                            <img src="http://localhost:8000/favicon.ico" alt="Apprentice" />
+                            <img src="https://cqupt-gsy.github.io/favicon.ico" alt="Apprentice" />
                         </figure>
                     <div class="post-author-bio">
-                        <h4 class="post-author-name"><a href="http://localhost:8000/author/apprentice">Apprentice</a></h4>
+                        <h4 class="post-author-name"><a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a></h4>
                             <p class="post-author-about">聚焦科技、热衷实践、记录不平凡的技术生活</p>
                             <span class="post-author-location"><i class="ic ic-location"></i> China</span>
                             <span class="post-author-website"><a href="mailto:gaosy.work@gmail.com"><i class="ic ic-link"></i> Website</a></span>
@@ -307,7 +306,7 @@
                     var disqus = 'apprentice-blog';
                     var disqus_shortname = 'apprentice-blog';
                     var disqus_identifier = '/2019/11/pelican-blog.html';
-                    var disqus_url = 'http://localhost:8000/2019/11/pelican-blog.html';
+                    var disqus_url = 'https://cqupt-gsy.github.io/2019/11/pelican-blog.html';
                 </script>
                 <noscript>Please enable JavaScript to view the comments.</noscript>
                 <section class="post-comments">
@@ -316,7 +315,7 @@
                 </section>
 
                 <aside class="post-nav">
-                    <a class="post-nav-prev" href="http://localhost:8000/2019/11/session-timeout.html">
+                    <a class="post-nav-prev" href="https://cqupt-gsy.github.io/2019/11/session-timeout.html">
                         <section class="post-nav-teaser">
                             <i class="ic ic-arrow-right"></i>
                                 <h2 class="post-nav-title">深入理解因集群导致的session timeout</h2>
@@ -345,7 +344,7 @@
   </section>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script type="text/javascript" src="http://localhost:8000/theme/js/script.js"></script>
+  <script type="text/javascript" src="https://cqupt-gsy.github.io/theme/js/script.js"></script>
 
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208599-1"></script>

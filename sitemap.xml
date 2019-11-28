@@ -4,133 +4,133 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>http://localhost:8000/</loc>
-<lastmod>2019-11-28T13:59:35-00:00</lastmod>
+<loc>https://cqupt-gsy.github.io/</loc>
+<lastmod>2019-11-28T20:10:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/archives.html</loc>
-<lastmod>2019-11-28T13:59:35-00:00</lastmod>
+<loc>https://cqupt-gsy.github.io/archives.html</loc>
+<lastmod>2019-11-28T20:10:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tags.html</loc>
-<lastmod>2019-11-28T13:59:35-00:00</lastmod>
+<loc>https://cqupt-gsy.github.io/tags.html</loc>
+<lastmod>2019-11-28T20:10:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/pages/profiles/</loc>
+<loc>https://cqupt-gsy.github.io/pages/profiles/</loc>
 <lastmod>2019-11-24T00:30:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/2019/11/pelican-blog.html</loc>
+<loc>https://cqupt-gsy.github.io/2019/11/pelican-blog.html</loc>
 <lastmod>2019-11-27T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/2019/11/session-timeout.html</loc>
+<loc>https://cqupt-gsy.github.io/2019/11/session-timeout.html</loc>
 <lastmod>2019-11-25T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/2019/11/efficient-google.html</loc>
+<loc>https://cqupt-gsy.github.io/2019/11/efficient-google.html</loc>
 <lastmod>2019-11-24T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/2019/11/beginning.html</loc>
+<loc>https://cqupt-gsy.github.io/2019/11/beginning.html</loc>
 <lastmod>2019-11-23T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/distributed-system</loc>
+<loc>https://cqupt-gsy.github.io/category/distributed-system</loc>
 <lastmod>2019-11-23T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/java-web</loc>
+<loc>https://cqupt-gsy.github.io/category/java-web</loc>
 <lastmod>2019-11-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/python</loc>
+<loc>https://cqupt-gsy.github.io/category/python</loc>
 <lastmod>2019-11-27T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/category/tool-tips</loc>
+<loc>https://cqupt-gsy.github.io/category/tool-tips</loc>
 <lastmod>2019-11-24T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/pelican</loc>
+<loc>https://cqupt-gsy.github.io/tag/pelican</loc>
 <lastmod>2019-11-27T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/github-pages</loc>
+<loc>https://cqupt-gsy.github.io/tag/github-pages</loc>
 <lastmod>2019-11-27T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/java-web</loc>
+<loc>https://cqupt-gsy.github.io/tag/java-web</loc>
 <lastmod>2019-11-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/session</loc>
+<loc>https://cqupt-gsy.github.io/tag/session</loc>
 <lastmod>2019-11-25T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/tool-tips</loc>
+<loc>https://cqupt-gsy.github.io/tag/tool-tips</loc>
 <lastmod>2019-11-24T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/tag/distributed-system</loc>
+<loc>https://cqupt-gsy.github.io/tag/distributed-system</loc>
 <lastmod>2019-11-23T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://localhost:8000/author/apprentice</loc>
+<loc>https://cqupt-gsy.github.io/author/apprentice</loc>
 <lastmod>2019-11-27T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
