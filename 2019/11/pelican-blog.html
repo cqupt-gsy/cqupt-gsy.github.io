@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <meta name="google-site-verification" content="GTo_mpNjSHa46yUCksCf_wo4KzjaAdD45koZAN4bpPw">
+
+  <title>基于pelican和github pages，搭建个人博客站点</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="http://localhost:8000/2019/11/pelican-blog.html" rel="canonical" />
+  <!-- Feed -->
+
+  <link href="http://localhost:8000/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="http://localhost:8000/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="如何利用pelican搭建私人的博客网站，并通过github pages发布是本文的重点内容。本文将分步骤详细介绍使用pelican搭建博客的过程，以及在搭建博客过程中可能出现的坑。希望能给其他同学一些避坑指南。">
+
+    <meta name="author" content="Apprentice">
+
+    <meta name="tags" content="pelican">
+    <meta name="tags" content="github pages">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Apprentice"/>
+<meta property="og:title" content="基于pelican和github pages，搭建个人博客站点"/>
+<meta property="og:description" content="如何利用pelican搭建私人的博客网站，并通过github pages发布是本文的重点内容。本文将分步骤详细介绍使用pelican搭建博客的过程，以及在搭建博客过程中可能出现的坑。希望能给其他同学一些避坑指南。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://localhost:8000/2019/11/pelican-blog.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-11-27 00:00:00+08:00"/>
+<meta property="article:modified_time" content="2019-11-27 00:00:00+08:00"/>
+<meta property="article:author" content="http://localhost:8000/author/apprentice">
+<meta property="article:section" content="python"/>
+<meta property="article:tag" content="pelican"/>
+<meta property="article:tag" content="github pages"/>
+<meta property="og:image" content="http://localhost:8000/images/header-cover/home-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "基于pelican和github pages，搭建个人博客站点",
+  "headline": "基于pelican和github pages，搭建个人博客站点",
+  "datePublished": "2019-11-27 00:00:00+08:00",
+  "dateModified": "2019-11-27 00:00:00+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "Apprentice",
+    "url": "http://localhost:8000/author/apprentice"
+  },
+  "image": "http://localhost:8000/images/header-cover/home-bg.jpg",
+  "url": "http://localhost:8000/2019/11/pelican-blog.html",
+  "description": "如何利用pelican搭建私人的博客网站，并通过github pages发布是本文的重点内容。本文将分步骤详细介绍使用pelican搭建博客的过程，以及在搭建博客过程中可能出现的坑。希望能给其他同学一些避坑指南。"
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archives.html" role="presentation">Archives</a></li>
+          <li><a href="/catgegories.html" role="presentation">Categories</a></li>
+          <li><a href="/tags.html" role="presentation">Tags</a></li>
+
+              <li role="presentation"><a href="http://localhost:8000/pages/profiles/">Profiles</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="http://localhost:8000/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">基于pelican和github pages，搭建个人博客站点</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="http://localhost:8000/author/apprentice">Apprentice</a>
+            | <time datetime="27 Nov 2019">27 Nov 2019</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <span class="post-meta"> | Updated on 27 Nov 2019</span>
+            <div class="post-cover cover" style="background-color: blue">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3>写在前面的话</h3>
+<p>在当代自媒体如此发达的时代，如果不主动分享自己的想法、知识，会让自己常常陷入比较被动的局面，这种被动的局面不仅仅是金钱方面的，更重要的是无法让别人快速识别你的能力。博客是一种非常重要的传播自己知识体系的自媒体，可以让别人通过它快速的了解你，所以本文主要介绍通过pelican构建自己的博客系统，然后将内容发布到github pages的过程，希望能给其他同学提供一些帮助。</p>
+<h3>环境准备</h3>
+<div class="highlight"><pre><span></span><span class="c1"># python3默认包含下面要用到的pip3工具</span>
+<span class="err">语言环境</span><span class="p">:</span> <span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
+
+<span class="c1"># 这两个是必备依赖，pelican用来创建博客，markdown是让博客系统识别markdown文件，其他的依赖可以等安装插件，使用插件时，如果遇到报错再选择性安装</span>
+<span class="err">博客依赖</span><span class="p">:</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">pelican</span> <span class="n">markdown</span> 
+</pre></div>
+
+
+<h3>本地初始化博客系统</h3>
+<ul>
+<li>选择合适的目录，创建你的博客文件夹，这里以<code>blogs</code>为示例</li>
+<li>进入<code>blogs</code>文件夹，允许命令<code>pelican-quickstart</code></li>
+</ul>
+<blockquote>
+<p>这个命令是互动式的，需要回答一些关于你博客的问题，比如博客的作者，博客的标题等等，请根据自己的个人信息回答完问题</p>
+</blockquote>
+<ul>
+<li>执行完<code>pelican-quickstart</code>命令后，在<code>blogs</code>目录中生成如下文件夹</li>
+</ul>
+<blockquote>
+<p><code>__pycache__</code>: python编译相关的缓存文件，不需要关心</p>
+<p><code>content</code>: 存储原始的博客文件</p>
+<p><code>Makefile</code>: 编译、启动本地服务的配置文件</p>
+<p><code>pelicanconf.py</code>: 博客本地相关的配置</p>
+<p><code>publishconf.py</code>: 发布博客时的配置，也就是发布到服务端时的配置</p>
+<p><code>tasks.py</code>: 一些命令的支撑代码，不需要关心</p>
+</blockquote>
+<ul>
+<li>到这里，就恭喜大家，你可以在本地运行<code>make serve</code>，然后在浏览器打开<code>http://localhost:8000</code>查看你的博客系统</li>
+</ul>
+<h3>博客系统的相关配置</h3>
+<p>如果你只需要一个简单的、可工作的博客，那么做完上面的工作，就可以将博客发布到github pages了，这部分的内容完全可以跳过。这部分主要是介绍一些主题和插件，让你的博客拥有更加强大的功能。</p>
+<h4>安装插件</h4>
+<ul>
+<li>在<code>blogs</code>目录运行命令<code>git clone --recursive https://github.com/getpelican/pelican-plugins</code>，下载官方的插件集</li>
+<li>在<code>pelicanconf.py</code>配置插件信息，例如</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="c1"># 指定插件的存放目录</span>
+  <span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pelican-plugins&#39;</span><span class="p">]</span>
+
+  <span class="c1"># 在插件目录中查找需要加载的插件名字</span>
+  <span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sitemap&#39;</span><span class="p">,</span> <span class="s1">&#39;neighbors&#39;</span><span class="p">,</span> <span class="s1">&#39;related_posts&#39;</span><span class="p">,</span> <span class="s1">&#39;tag_cloud&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<ul>
+<li>每个插件可能需要不同的依赖以及配置，详情请参考<a href="https://github.com/getpelican/pelican-plugins">pelican-plugins</a></li>
+<li>最后，重新生成博客，启动服务查看插件效果（如何生成博客、启动服务，后面会介绍）</li>
+</ul>
+<h4>安装主题</h4>
+<ul>
+<li>在<code>blogs</code>目录运行命令<code>git clone --recursive https://github.com/getpelican/pelican-themes</code>，下载官方的主题集</li>
+<li>在<code>pelicanconf.py</code>配置主题信息，例如</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="c1"># 指定博客主题</span>
+  <span class="n">THEME</span> <span class="o">=</span> <span class="s1">&#39;pelican-themes/attila&#39;</span>
+</pre></div>
+
+
+<ul>
+<li>每个主题可能需要不同的配置，详情请参考<a href="https://github.com/getpelican/pelican-themes">pelican-themes</a></li>
+<li>最后，重新生成博客，启动服务查看插件效果（如何生成博客、启动服务，后面会介绍）</li>
+</ul>
+<h4>评论组件配置</h4>
+<p>给博客添加评论功能，让别人可以评论你的博客，本文介绍disqus评论组件的配置。</p>
+<ul>
+<li>首先到<a href="https://disqus.com/">disqus</a>注册账号，并且获取你的<code>SITE_CODE</code></li>
+<li>在<code>pelicanconf.py</code>中添加配置<code>DISQUS_SITENAME = "SITE_CODE"</code></li>
+<li>最关键的，如果想让你的评论组件生效，添加配置<code>SITEURL = '你博客站点的根域名'</code>，<strong>一定不能把这个配置留空</strong></li>
+<li>最后，重新生成博客，启动服务查看配置效果（如何生成博客、启动服务，后面会介绍）</li>
+</ul>
+<h4>谷歌分析配置</h4>
+<p>将博客信息添加谷歌分析，不仅能够让别人可以通过谷歌搜索到你的博客，而且还可以统计出有多少人在什么时间段看过你的博客，给博客增加非常强大的后台分析功能。</p>
+<ul>
+<li>首先到<a href="https://analytics.google.com/">google analytics</a>注册账号，并且获取<code>GOOGLE_ANALYTICS_ID</code></li>
+<li>在<code>pelicanconf.py</code>中添加配置<code>GOOGLE_ANALYTICS = 'GOOGLE_ANALYTICS_ID'</code></li>
+</ul>
+<blockquote>
+<p>如果需要绑定谷歌搜索控制台功能，则可以在谷歌搜索控制台获取<code>GOOGLE_SITE_VERIFICATION_CODE</code></p>
+<p>在<code>pelicanconf.py</code>中添加配置<code>GOOGLE_SITE_VERIFICATION = 'GOOGLE_SITE_VERIFICATION_CODE'</code></p>
+</blockquote>
+<ul>
+<li>最后重新生成博客，并发布到服务端，并在<a href="https://analytics.google.com/">google analytics</a>验证你的配置是否生效</li>
+</ul>
+<h4>其他配置</h4>
+<ul>
+<li>指定静态文件目录：<code>STATIC_PATHS = ['images']</code></li>
+<li>指定默认分页数值：<code>DEFAULT_PAGINATION = 4</code></li>
+<li>指定博客相对路径：<code>ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'</code></li>
+<li>其他更多的配置属性，详情请参考<a href="https://docs.getpelican.com/en/stable/settings.html">pelican-configs</a></li>
+<li>最后，重新生成博客，启动服务查看配置效果（如何生成博客、启动服务，后面会介绍）</li>
+</ul>
+<h3>生成本地博客，以及启动服务调试</h3>
+<p>当你在本地完成了博客文章后，你需要查看一下最终效果在发布到服务端，这个时候就可以启用本地调试了。</p>
+<ul>
+<li>首先所有博客源文件都是在<code>content</code>目录中的</li>
+<li>其次在<code>blogs</code>目录中运行命令<code>make html</code>，生成发布版的博客文件</li>
+<li>最后在<code>blogs</code>目录中运行命令<code>make serve</code>，在浏览器打开<code>http://localhost:8000</code>查看你新写的博客了</li>
+</ul>
+<h3>发布博客</h3>
+<p>恭喜你只差最后一步就可以发布你的博客了，并且可以让别人看到你的私人博客系统，是不是很兴奋。这里主要介绍的是github的个人repository方式发布，当然如果条件允许，你也可以使用github的project方式发布，具体的区别请看<a href="https://help.github.com/en/github/working-with-github-pages/about-github-pages#publishing-sources-for-github-pages-sites">publishing-sources-for-github-pages-sites</a>。</p>
+<ul>
+<li>首先到<a href="https://github.com/">github</a>注册账号，并且创建一个repository，名字为<code>username.github.io</code></li>
+<li>其次到<code>output</code>目录，把你要发布的博客内容关联到新建的repository（新建的repository页面有步骤提升告诉你如何操作）</li>
+<li>最后将内容发布到repository</li>
+<li>然后你就可以通过<code>https://username.github.io/index.html</code>访问你的博客了</li>
+</ul>
+<h3>总结</h3>
+<p>到这里你已经完成了一次博客的发布了，当然你的博客系统的配置是随时可以改的，哪天想换个主题了就选个新的主题更新就可以了。最后描述一下，持续写博客发布博客的流程。</p>
+<ul>
+<li><code>content</code>目录编辑原始博客文件</li>
+<li>在<code>blogs</code>目录中运行命令<code>make html</code>生成发布文件</li>
+<li>在<code>blogs</code>目录中运行命令<code>make serve</code>，在浏览器打开<code>http://localhost:8000</code>调试你的博客</li>
+<li>到<code>output</code>目录中运行</li>
+</ul>
+<blockquote>
+<p><code>git add .</code>，添加跟踪所有文件的修改</p>
+<p><code>git commit -m "commit msg"</code>，提交本地的修改</p>
+<p><code>git push</code>，将本地修改发布到服务端</p>
+</blockquote>
+<ul>
+<li>通过<code>https://username.github.io/index.html</code>访问你的博客</li>
+</ul>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=基于pelican和github pages，搭建个人博客站点&amp;url=http://localhost:8000/2019/11/pelican-blog.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:8000/2019/11/pelican-blog.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=http://localhost:8000/2019/11/pelican-blog.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="http://localhost:8000/tag/pelican">pelican</a><a href="http://localhost:8000/tag/github-pages">github pages</a>                </aside>
+
+                <div class="clear"></div>
+
+                <aside class="post-author">
+
+
+                        <figure class="post-author-avatar">
+                            <img src="http://localhost:8000/favicon.ico" alt="Apprentice" />
+                        </figure>
+                    <div class="post-author-bio">
+                        <h4 class="post-author-name"><a href="http://localhost:8000/author/apprentice">Apprentice</a></h4>
+                            <p class="post-author-about">聚焦科技、热衷实践、记录不平凡的技术生活</p>
+                            <span class="post-author-location"><i class="ic ic-location"></i> China</span>
+                            <span class="post-author-website"><a href="mailto:gaosy.work@gmail.com"><i class="ic ic-link"></i> Website</a></span>
+                        <!-- Social linkes in alphabet order. -->
+                            <span class="post-author-github"><a target="_blank" href="https://github.com/cqupt-gsy"><i class="ic ic-link"></i> GitHub</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </aside>
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'apprentice-blog';
+                    var disqus_shortname = 'apprentice-blog';
+                    var disqus_identifier = '/2019/11/pelican-blog.html';
+                    var disqus_url = 'http://localhost:8000/2019/11/pelican-blog.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/2019/11/pelican-blog.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>
+                </section>
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="http://localhost:8000/2019/11/session-timeout.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">深入理解因集群导致的session timeout</h2>
+                            <p class="post-nav-excerpt">当服务端使用集群时，客户端经常发生session...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://localhost:8000/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208599-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-153208599-1', { 'anonymize_ip': true });
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'apprentice-blog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
