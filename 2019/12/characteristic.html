@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <meta name="google-site-verification" content="GTo_mpNjSHa46yUCksCf_wo4KzjaAdD45koZAN4bpPw">
+
+  <title>分布式系统-关键特性</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="https://cqupt-gsy.github.io/2019/12/characteristic.html" rel="canonical" />
+  <!-- Feed -->
+
+  <link href="https://cqupt-gsy.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://cqupt-gsy.github.io/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="任何事物的存在都有其特性，该特性或许是该事物的优势亦或是劣势。分布式系统也有其关键特性，因此在了解了分布式系统的基础概念后，我们需要针对分布式系统的特性做进一步的分析，以加深我们对其的理解，并为后续的实践提供理论支撑。">
+
+    <meta name="author" content="Apprentice">
+
+    <meta name="tags" content="distributed system">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Apprentice"/>
+<meta property="og:title" content="分布式系统-关键特性"/>
+<meta property="og:description" content="任何事物的存在都有其特性，该特性或许是该事物的优势亦或是劣势。分布式系统也有其关键特性，因此在了解了分布式系统的基础概念后，我们需要针对分布式系统的特性做进一步的分析，以加深我们对其的理解，并为后续的实践提供理论支撑。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://cqupt-gsy.github.io/2019/12/characteristic.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-12-26 00:00:00+08:00"/>
+<meta property="article:modified_time" content="2019-12-26 00:00:00+08:00"/>
+<meta property="article:author" content="https://cqupt-gsy.github.io/author/apprentice">
+<meta property="article:section" content="distributed system"/>
+<meta property="article:tag" content="distributed system"/>
+<meta property="og:image" content="https://cqupt-gsy.github.io/images/header-cover/distributed-system.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "分布式系统-关键特性",
+  "headline": "分布式系统-关键特性",
+  "datePublished": "2019-12-26 00:00:00+08:00",
+  "dateModified": "2019-12-26 00:00:00+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "Apprentice",
+    "url": "https://cqupt-gsy.github.io/author/apprentice"
+  },
+  "image": "https://cqupt-gsy.github.io/images/header-cover/distributed-system.jpg",
+  "url": "https://cqupt-gsy.github.io/2019/12/characteristic.html",
+  "description": "任何事物的存在都有其特性，该特性或许是该事物的优势亦或是劣势。分布式系统也有其关键特性，因此在了解了分布式系统的基础概念后，我们需要针对分布式系统的特性做进一步的分析，以加深我们对其的理解，并为后续的实践提供理论支撑。"
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archives.html" role="presentation">Archives</a></li>
+          <li><a href="/catgegories.html" role="presentation">Categories</a></li>
+
+              <li role="presentation"><a href="https://cqupt-gsy.github.io/pages/profiles/">Profiles</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://cqupt-gsy.github.io/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">分布式系统-关键特性</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a>
+            | <time datetime="26 Dec 2019">26 Dec 2019</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <span class="post-meta"> | Updated on 26 Dec 2019</span>
+            <div class="post-cover cover" style="background-image: url('https://cqupt-gsy.github.io/images/header-cover/distributed-system.jpg')">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3>前言</h3>
+<p>在<a href="https://cqupt-gsy.github.io/2019/11/beginning.html">分布式系统-缘起</a>中，我们简单描述了分布式系统的概念以及其组成形式等相关知识，这些内容只能帮助我们对分布式系统有一个大体的概念认识。本文将会进一步探索分布式系统，深入分析分布式系统关键特性的学习中。</p>
+<h3><a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP Theorem</a></h3>
+<p>分布式系统给我们带来的好处是显而易见的，例如：让我们从容的应对大并发，使用最少的资源完成计算任务等等。但是任何事物都不是十全十美的，分布式系统也不例外。系统一旦引入分布式架构，故障节点增多、故障发生的频率变高、故障追踪变得更加困难、数据的一致性如何保证等都是一些非常棘手的问题。幸运的是，前人帮我们总结了CAP Theorem，该理论从高层次对分布式系统的特性进行了总结，可以帮助我们在解决分布式系统相关问题时，提供理论支撑和思路。</p>
+<p>CAP是Consistency、Availability、Partition tolerance的缩写，并且是分布式系统中核心关注的特性，下面将分别介绍。</p>
+<ul>
+<li>Consistency：是指系统一致性，也就是说系统在任何时候的状态都是一致。以单机系统来说，就是一个强一致的系统，在任何时候系统内部的状态或数据对外部来说都是一致；<em>（系统外部总能读到最新写的结果，或者系统错误）</em> 扩展到分布式系统，就要求在任何时候系统内部的所有系统状态对外部都是一致的。</li>
+<li>Availability：是指系统可用性，从字面上理解就是系统在任何时候都能对外提供服务。同样以单机系统为例，任何时候该系统能够对外提供服务，就表明该系统的可用性很好。<em>(虽然我们知道这种情况不太现实，单机系统的可用性相比分布式系统是很差的)</em> 延伸到分布式系统，当系统内部有部分系统失效后，系统还能够对外部提供服务。</li>
+<li>Partition tolerance：是指分区容错性，是指系统在发生网络分区时还能够对外提供正常的服务。<em>（网络分区有两层意思，第一就是因为网络问题，导致部分机器不可达呈现部分服务挂了；其次就是由于物理机硬件故障导致部分服务挂了）</em> 对于单机系统而言，不存在网络分区问题所以也就不存在分区容错性。但是在分布式系统中，可以认为网络分区是随时存在的，任何硬件资源都是不可靠地，所以不可避免的要为分布式系统设计分区容错性。<em>（这里涉及到一致性和可用性的取舍问题，在后面会细说）</em></li>
+</ul>
+<p>虽然我们分点介绍了CAP，但是如果想正真的理解CAP以及它如何影响分布式系统的关键特性，<strong>我们需要将CAP当做一个整体去理解</strong>。所以让我们再次从下图中分析CAP以及每个特性之间的相互联系：<em>（图片来源于网络）</em></p>
+<p><img alt="CAP" src="/images/distributed-system/cap.jpeg"></p>
+<p>从图中我们可以看到CAP的三个特性是相互交叉，且只能两两相交，有效的组合为CA、CP、AP。这是什么意思呢？我们先回顾下，分布式系统组织形式的特点——将单个任务拆分，分配到多台机器执行。这种方式组织系统很容易出现各种各样的故障，比如程序故障、内存不足、硬盘损坏、网络不通。尤其是当系统规模非常大时，这些故障发生的频率就更高了，所以一旦做分布式系统架构下的开发，我们就会假设任何一台服务随时都会挂，这也是为什么分布式系统必定存在网络分区问题的原因，因此必须为分布式系统设计分区容错性的解决方案，这也是我们平时理解的在分布式系统架构下必须考虑CAP理论的P这个特性。</p>
+<p>继续思考，为什么分布式系统只能满足AP或CP，而不是满足CAP呢？这个问题我们得回顾一下在分点介绍CAP时，C和A分别代表什么意思。C是一致性，任何时候系统内部状态都是一致的；A表示可用性，任何时候系统都能对外提供服务。因此当在分布式系统中保障分区容错性的前提下，一致性和可用性就成为了一对矛盾体。</p>
+<p>如果要保持高可用，即AP，则势必满足不了一致性的特点。举个比较简单的例子帮助大家理解，3台存储服务器对外提供服务，为了满足AP的特性，我们允许其中任意2台服务挂了的情况下，对外还是可以提供服务的。这个时候如果有新的数据写进来，3台服务的状态就不一致了。</p>
+<p>同样如果要保持强一致性，即CP，则无法满足高可用的特点。还是拿同一个例子帮助大家理解，3台存储服务器对外提供服务，为了满足CP的特性，一旦有一台服务挂了，则整个系统是无法对外提供服务的，因为继续提供服务会导致系统内部3台服务之间的状态不一致。</p>
+<p><strong>到此，我们从理论上分析了分布式系统为什么只能满足AP或CP的原因。但实际项目中是这么的绝对吗？答案是否定的，我们在设计实际的分布式系统时，CAP三个特性都会考虑，只不过根据具体的业务场景，我们会选择偏向AP或者CP的系统。</strong>比如我们非常重视数据的一致性，那么在设计时，我们可以允许在少部分服务挂了的时候还是可以对外提供服务，只要满足大部分服务的状态是一致的就可以了，例如Zookeeper在写数据时，只要大部分节点可以执行写操作，则系统就可以对外提供服务。同样如果我们非常重视可用性，允许数据的不一致，那么只要系统中有可用的服务就可以对外提供服务，例如Redis在写数据时，只要求在主节点写成功，至于从节点与主节点数据状态是否一致并不是那么重要。</p>
+<p>最后还剩一个CA我们没有讨论，因为这种组合是单机系统的关键特性，原因很简单，单机系统对外提供服务时，内部状态肯定是一致的。而如果单机系统无法对外提供服务时，也不存在其他途径去更改系统内部的状态。并且单机系统是不存在网络分区这个问题的，所以也不需要考虑分区容错性的问题。</p>
+<h3>BASE Theorem</h3>
+<p>理解了CAP理论后，我们可以快速过一下其延伸，BASE理论。BASE理论就是CAP理论中AP系统的延伸，具体特性如下：</p>
+<ul>
+<li>Basic Availability：基本可用性，表示只要系统核心服务没有出问题，就能对外提供服务。至于非核心的服务挂了以后要求不能影响核心业务对外提供服务。</li>
+<li>Soft State：软状态，表示系统允许用户读到部分中间状态的数据，也就是说发生多写时，读的用户可能读到中间某个写的结果，比如秒杀系统，有些用户刷新时，显示库存为50，但实际可能已经卖光了</li>
+<li>Eventually Consistency：最终一致性，表示系统随着时间的推移，最终会趋于同一状态，比如秒杀系统，当你查到库存50，点击购买时，会告诉你已售罄，当你再次刷新系统时，就会显示库存为0</li>
+</ul>
+<p>BASE Theorem在网上的资料不是很多，但是其本质就是CAP理论中AP系统的延伸，在容忍一定数据不一致的情况下，尽量保证系统的可用性。这也是大部分互联网公司设计系统时考虑的重点。</p>
+<h3>结语</h3>
+<p>分布式系统可以帮助我们解决很多单机无法解决的问题，同时也提高了我们对计算机的资源利用率。但是在设计分布式系统时，不可避免会遇到各种各样的故障问题，如何去规避这些故障、或者在故障发生后如何保障系统继续正常使用，是一个巨大的挑战。幸运的是，我们有前人总结的CAP Theorem保驾护航，<strong>我们只需要思考，在保障系统分区容错性的前提下，如何去衡量系统的一致性和可用性，</strong>并以此为依据设计出合理的分布式系统。</p>
+<p><em>欢迎大家在评论区讨论各种分布式系统相关的内容。</em></p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=分布式系统-关键特性&amp;url=https://cqupt-gsy.github.io/2019/12/characteristic.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://cqupt-gsy.github.io/2019/12/characteristic.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://cqupt-gsy.github.io/2019/12/characteristic.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://cqupt-gsy.github.io/tag/distributed-system">distributed system</a>                </aside>
+
+                <div class="clear"></div>
+
+                <aside class="post-author">
+
+
+                        <figure class="post-author-avatar">
+                            <img src="https://cqupt-gsy.github.io/favicon.ico" alt="Apprentice" />
+                        </figure>
+                    <div class="post-author-bio">
+                        <h4 class="post-author-name"><a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a></h4>
+                            <p class="post-author-about">聚焦科技、热衷实践、记录不平凡的技术生活</p>
+                            <span class="post-author-location"><i class="ic ic-location"></i> China</span>
+                            <span class="post-author-website"><a href="mailto:gaosy.work@gmail.com"><i class="ic ic-link"></i> Website</a></span>
+                        <!-- Social linkes in alphabet order. -->
+                            <span class="post-author-github"><a target="_blank" href="https://github.com/cqupt-gsy"><i class="ic ic-link"></i> GitHub</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </aside>
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'apprentice-blog';
+                    var disqus_shortname = 'apprentice-blog';
+                    var disqus_identifier = '/2019/12/characteristic.html';
+                    var disqus_url = 'https://cqupt-gsy.github.io/2019/12/characteristic.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/2019/12/characteristic.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>
+                </section>
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://cqupt-gsy.github.io/2019/11/pelican-blog.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">基于pelican和github pages，搭建个人博客站点</h2>
+                            <p class="post-nav-excerpt">如何利用pelican搭建私人的博客网站，并通过github...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cqupt-gsy.github.io/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208599-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-153208599-1', { 'anonymize_ip': true });
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'apprentice-blog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

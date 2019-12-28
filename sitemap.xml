@@ -5,21 +5,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cqupt-gsy.github.io/</loc>
-<lastmod>2019-12-07T01:37:03-00:00</lastmod>
+<lastmod>2019-12-28T16:59:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cqupt-gsy.github.io/archives.html</loc>
-<lastmod>2019-12-07T01:37:03-00:00</lastmod>
+<lastmod>2019-12-28T16:59:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://cqupt-gsy.github.io/tags.html</loc>
-<lastmod>2019-12-07T01:37:03-00:00</lastmod>
+<lastmod>2019-12-28T16:59:01-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -27,6 +27,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://cqupt-gsy.github.io/pages/profiles/</loc>
 <lastmod>2019-11-24T00:30:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cqupt-gsy.github.io/2019/12/characteristic.html</loc>
+<lastmod>2019-12-26T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -61,7 +68,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://cqupt-gsy.github.io/category/distributed-system</loc>
-<lastmod>2019-12-06T00:00:00+08:06</lastmod>
+<lastmod>2019-12-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -83,6 +90,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://cqupt-gsy.github.io/category/tool-tips</loc>
 <lastmod>2019-11-24T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://cqupt-gsy.github.io/tag/distributed-system</loc>
+<lastmod>2019-12-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -123,15 +137,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://cqupt-gsy.github.io/tag/distributed-system</loc>
-<lastmod>2019-12-06T00:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://cqupt-gsy.github.io/author/apprentice</loc>
-<lastmod>2019-12-06T00:00:00+08:06</lastmod>
+<lastmod>2019-12-26T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
