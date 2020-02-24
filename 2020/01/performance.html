@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <meta name="google-site-verification" content="GTo_mpNjSHa46yUCksCf_wo4KzjaAdD45koZAN4bpPw">
+
+  <title>Java后端性能优化--持续更新</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="https://cqupt-gsy.github.io/2020/01/performance.html" rel="canonical" />
+  <!-- Feed -->
+
+  <link href="https://cqupt-gsy.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://cqupt-gsy.github.io/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="应用程序的性能问题是后端开发的老大难问题，本文记录实际项目中碰到的性能问题，以及相关的解决思路，长期更新">
+
+    <meta name="author" content="Apprentice">
+
+    <meta name="tags" content="java web">
+    <meta name="tags" content="performance">
+    <meta name="tags" content="database">
+    <meta name="tags" content="cache">
+    <meta name="tags" content="thread">
+    <meta name="tags" content="concurrent">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Apprentice"/>
+<meta property="og:title" content="Java后端性能优化--持续更新"/>
+<meta property="og:description" content="应用程序的性能问题是后端开发的老大难问题，本文记录实际项目中碰到的性能问题，以及相关的解决思路，长期更新"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://cqupt-gsy.github.io/2020/01/performance.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-01-13 00:00:00+08:00"/>
+<meta property="article:modified_time" content="2020-01-30 00:00:00+08:00"/>
+<meta property="article:author" content="https://cqupt-gsy.github.io/author/apprentice">
+<meta property="article:section" content="java web"/>
+<meta property="article:tag" content="java web"/>
+<meta property="article:tag" content="performance"/>
+<meta property="article:tag" content="database"/>
+<meta property="article:tag" content="cache"/>
+<meta property="article:tag" content="thread"/>
+<meta property="article:tag" content="concurrent"/>
+<meta property="og:image" content="https://cqupt-gsy.github.io/images/header-cover/java-web.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Java后端性能优化--持续更新",
+  "headline": "Java后端性能优化--持续更新",
+  "datePublished": "2020-01-13 00:00:00+08:00",
+  "dateModified": "2020-01-30 00:00:00+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "Apprentice",
+    "url": "https://cqupt-gsy.github.io/author/apprentice"
+  },
+  "image": "https://cqupt-gsy.github.io/images/header-cover/java-web.jpg",
+  "url": "https://cqupt-gsy.github.io/2020/01/performance.html",
+  "description": "应用程序的性能问题是后端开发的老大难问题，本文记录实际项目中碰到的性能问题，以及相关的解决思路，长期更新"
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archives.html" role="presentation">Archives</a></li>
+          <li><a href="/catgegories.html" role="presentation">Categories</a></li>
+
+              <li role="presentation"><a href="https://cqupt-gsy.github.io/pages/profiles/">Profiles</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://cqupt-gsy.github.io/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Java后端性能优化--持续更新</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a>
+            | <time datetime="13 Jan 2020">13 Jan 2020</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <span class="post-meta"> | Updated on 30 Jan 2020</span>
+            <div class="post-cover cover" style="background-image: url('https://cqupt-gsy.github.io/images/header-cover/java-web.jpg')">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3>前言</h3>
+<p>开发后端系统时，随着用户量的增加，并发量会显著提高，如何在有限的硬件资源下让系统响应更多的请求，就是后端性能优化的主要工作。按照系统职责划分，可优化的点可以分为后端应用系统、数据库系统、中间件系统、缓存系统、网关系统等等。本文将会从实战的角度出发，持续更新针对不同系统的优化思路。</p>
+<h3>系统性的性能调优</h3>
+<p>系统性的性能调优是指，针对整个系统，优化配置、调优参数。具体操作流程强依赖性能测试的结果，性能测试的用例不针对某一接口或某一类接口，而是模拟正常用户使用系统，对系统的每个功能都要涉及，然后看系统哪些地方会由于配置问题产生性能瓶颈。例如在使用SpringCloud时，如果系统使用了Zuul作为服务网关，那么当用户量变多，系统响应不及时时，会产生大量的SHORT_CIRCUIT异常，这是因为Zuul作为网关时，默认设置了100的信号量，当用完了，就会发生短路，避免下游服务被压垮。其次因为系统性的性能调优不是针对某一个接口调优的，我们需要记录系统每个层级的日志，帮助我们发现系统级的性能问题。例如在数据库层记录慢查询日志，调研慢查询产生的原因；记录应用层的调用链路以及耗时，调查耗时高的操作产生的原因等等。</p>
+<h4>调优思路</h4>
+<ul>
+<li>设计性能测试用例，全功能执行性能测试</li>
+<li>针对性能测试结果，分析后端应用系统产生500异常的原因，并采取措施解决</li>
+<li>针对后端应用系统调用链日志，分析耗时操作的原因并解决</li>
+<li>分析数据库系统的慢查询日志，分析原因并解决慢查询语句</li>
+<li>分析数据库的参数配置，在有限的硬件资源下，将数据库吞吐量调整到最优</li>
+<li>分析中间件系统参数配置，生产者、消费者线程的配置，消息的分片配置等等</li>
+<li>分析缓存系统的吞吐量等等</li>
+<li>分析网关系统的参数配置，调优吞吐量等等</li>
+</ul>
+<p>总而言之，在分析系统性的性能测试结果时，先思考第三方依赖的参数配置是否调到合适的值，然后再分析自己系统应用层面的原因，再者分析自己系统数据库层面的原因。</p>
+<h3>单一接口的性能调优</h3>
+<p>单一接口的性能调优来自两方面的原因，一方面是系统性性能测试时，发现个别接口性能有问题，造成系统瓶颈；另一方面则是某些接口在用户使用时，经常性超时，整个接口运行时间非常耗时。</p>
+<h4>调优思路</h4>
+<ul>
+<li>静态代码扫描，针对不合理的实现进行优化，例如将网络操作、IO操作并行化</li>
+<li>合理使用缓存，能够将数据缓存到内存中的操作，尽量缓存数据</li>
+<li>避免N+1问题，需要访问第三方的接口切记不要写在循环中，可提前访问将数据存放到Map中</li>
+<li>动态代码扫描，通过visualVM等JVM可视化工具，监控代码执行时的GC日志，排查是否是GC导致的性能问题</li>
+<li>动态代码扫描，通过visualVM等JVM可视化工具，查看堆栈信息，调查耗时的方法以及耗时的原因</li>
+</ul>
+<p>单一接口的性能调优是比较直观的，常用的方法就是并行化操作、将数据缓存到内存或者加载到内存避免IO或者网络操作。只要能发现瓶颈，就能够快速的通过其他实现方式优化性能。（一定要合理利用JVM可视化工具，排查线程执行慢的原因，并针对性的解决问题）。</p>
+<h3>已经解决过得问题汇总</h3>
+<ul>
+<li>
+<p>将数据库中所有数据导出到Excel表格时，耗时2分钟左右，导致前端超时断连</p>
+<blockquote>
+<p>静态代码扫描：发现数据库查询不合理，通过主表的Id去从表做范围查询，实际主表的数据已经全部查出来了，从表的数据也可以直接查出来，并且还可以拆断关联，用多线程去查询主表以及多个从表，这样十几个数据库的查询耗时将缩短到最耗时那次数据库查询；其次做数据映射时，在循环中反复调用第三方接口拿数据，产生N+1问题，优化该接口调用方式，提前调用将数据加载至内存；最后数据映射方法时串行执行的，但是所有需要映射的数据之间是没用关联的，所以改成并行执行；动态代码扫描：发现缓存框架在反复执行序列化和反序列化操作，并且是最耗时的操作，因此修改配置不再让缓存框架执行序列化和反序列化操作。</p>
+</blockquote>
+</li>
+<li>
+<p>mysql慢查询日志记录了执行慢的sql语句，分析sql执行慢的原因</p>
+<blockquote>
+<p>首先explain每条sql语句，检查是否查询走了索引，没走索引，依据索引最左匹配原则建立索引；建立索引后继续执行是否有优化，如果sql由于lock time耗时太多还是被记录到了慢查询日志中，就需要到应用层分析哪些地方给sql加锁，去除无效锁；最后根据数据特点，如果某些sql无法优化了，但是又执行的多，并且数据变化频率不高，则可以将该sql的执行结果加载到内存缓存起来。</p>
+</blockquote>
+</li>
+</ul>
+<p><em>持续更新中。。。</em></p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Java后端性能优化--持续更新&amp;url=https://cqupt-gsy.github.io/2020/01/performance.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://cqupt-gsy.github.io/2020/01/performance.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://cqupt-gsy.github.io/2020/01/performance.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://cqupt-gsy.github.io/tag/java-web">java web</a><a href="https://cqupt-gsy.github.io/tag/performance">performance</a><a href="https://cqupt-gsy.github.io/tag/database">database</a><a href="https://cqupt-gsy.github.io/tag/cache">cache</a><a href="https://cqupt-gsy.github.io/tag/thread">thread</a><a href="https://cqupt-gsy.github.io/tag/concurrent">concurrent</a>                </aside>
+
+                <div class="clear"></div>
+
+                <aside class="post-author">
+
+
+                        <figure class="post-author-avatar">
+                            <img src="https://cqupt-gsy.github.io/favicon.ico" alt="Apprentice" />
+                        </figure>
+                    <div class="post-author-bio">
+                        <h4 class="post-author-name"><a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a></h4>
+                            <p class="post-author-about">聚焦科技、热衷实践、记录不平凡的技术生活</p>
+                            <span class="post-author-location"><i class="ic ic-location"></i> China</span>
+                            <span class="post-author-website"><a href="mailto:gaosy.work@gmail.com"><i class="ic ic-link"></i> Website</a></span>
+                        <!-- Social linkes in alphabet order. -->
+                            <span class="post-author-github"><a target="_blank" href="https://github.com/cqupt-gsy"><i class="ic ic-link"></i> GitHub</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </aside>
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'apprentice-blog';
+                    var disqus_shortname = 'apprentice-blog';
+                    var disqus_identifier = '/2020/01/performance.html';
+                    var disqus_url = 'https://cqupt-gsy.github.io/2020/01/performance.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/2020/01/performance.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>
+                </section>
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://cqupt-gsy.github.io/2020/01/distributed-transactions.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">分布式系统-分布式事务</h2>
+                            <p class="post-nav-excerpt">随着系统服务的分布式化，底层的数据也会被对应地分散存储，甚至在更为极端的微服务设计中，一个服务要求对应一个数据库，完全将数据分布式化存储。这种架构设计给系统带来了灵活性和持续...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cqupt-gsy.github.io/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208599-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-153208599-1', { 'anonymize_ip': true });
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'apprentice-blog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
