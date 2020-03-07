@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <meta name="google-site-verification" content="GTo_mpNjSHa46yUCksCf_wo4KzjaAdD45koZAN4bpPw">
+
+  <title>TCC</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+<link href="https://cqupt-gsy.github.io/2020/02/TCC.html" rel="canonical" />
+  <!-- Feed -->
+
+  <link href="https://cqupt-gsy.github.io/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://cqupt-gsy.github.io/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+
+    <meta name="description" content="本文以TCC为理论依据，实现分布式转账功能，系统由事务管理服务、转出服务和转入服务构成。基本流程为事务管理服务记录转账交易记录，然后通过调用转出服务完成扣钱功能，调用转入服务完成加钱功能，保证事务管理服务、转出服务、转入服务中的数据状态最终一致。">
+
+    <meta name="author" content="Apprentice">
+
+    <meta name="tags" content="distributed system">
+    <meta name="tags" content="distributed transaction">
+    <meta name="tags" content="TCC">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Apprentice"/>
+<meta property="og:title" content="TCC"/>
+<meta property="og:description" content="本文以TCC为理论依据，实现分布式转账功能，系统由事务管理服务、转出服务和转入服务构成。基本流程为事务管理服务记录转账交易记录，然后通过调用转出服务完成扣钱功能，调用转入服务完成加钱功能，保证事务管理服务、转出服务、转入服务中的数据状态最终一致。"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://cqupt-gsy.github.io/2020/02/TCC.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-02-27 00:00:00+08:00"/>
+<meta property="article:modified_time" content="2019-02-27 00:00:00+08:00"/>
+<meta property="article:author" content="https://cqupt-gsy.github.io/author/apprentice">
+<meta property="article:section" content="distributed system"/>
+<meta property="article:tag" content="distributed system"/>
+<meta property="article:tag" content="distributed transaction"/>
+<meta property="article:tag" content="TCC"/>
+<meta property="og:image" content="https://cqupt-gsy.github.io/images/header-cover/distributed-system.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "TCC",
+  "headline": "TCC",
+  "datePublished": "2020-02-27 00:00:00+08:00",
+  "dateModified": "2019-02-27 00:00:00+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "Apprentice",
+    "url": "https://cqupt-gsy.github.io/author/apprentice"
+  },
+  "image": "https://cqupt-gsy.github.io/images/header-cover/distributed-system.jpg",
+  "url": "https://cqupt-gsy.github.io/2020/02/TCC.html",
+  "description": "本文以TCC为理论依据，实现分布式转账功能，系统由事务管理服务、转出服务和转入服务构成。基本流程为事务管理服务记录转账交易记录，然后通过调用转出服务完成扣钱功能，调用转入服务完成加钱功能，保证事务管理服务、转出服务、转入服务中的数据状态最终一致。"
+}
+</script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+          <li><a href="/archives.html" role="presentation">Archives</a></li>
+          <li><a href="/catgegories.html" role="presentation">Categories</a></li>
+
+              <li role="presentation"><a href="https://cqupt-gsy.github.io/pages/profiles/">Profiles</a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://cqupt-gsy.github.io/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">TCC</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a>
+            | <time datetime="27 Feb 2020">27 Feb 2020</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <span class="post-meta"> | Updated on 27 Feb 2019</span>
+            <div class="post-cover cover" style="background-image: url('https://cqupt-gsy.github.io/images/header-cover/distributed-system.jpg')">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3>前言</h3>
+<p>通过<a href="https://cqupt-gsy.github.io/2020/01/distributed-transactions.html">分布式系统-分布式事务</a>中介绍，TCC解决分布式事务的基本流程为：在Try阶段，主业务服务记录交易信息，并通知从业务服务锁定事务需要的资源。如果从业务都能够锁定事务所需要的资源，主业务则通知从业务真正提交锁定的资源，否则通知从业务回滚锁定的资源。本文依托该理论思想，实现分布式系统下的转账功能，以便进一步加深理解TCC。</p>
+<h3>业务描述</h3>
+<p>客户端发起转账请求，事务管理服务接收请求后，开始TCC转账流程，事务管理服务、转入服务、转出服务都是独立的服务，并且每个服务拥有自己独立的数据库管理数据。</p>
+<p>要求：</p>
+<blockquote>
+<p>事务管理服务、转入服务、转出服务必须幂等，不重复处理同一笔交易信息
+服务可以水平扩展，既能够以集群的方式部署接收请求，也能够以分布式主从架构部署提供服务
+保障资金安全的最高优先级，转账过程中不能出现资金错误
+在保障资金安全的前提下，尽可能提高系统性能</p>
+</blockquote>
+<h3>技术栈</h3>
+<blockquote>
+<p>服务对外的通信框架：SpringBoot (RESTFul API)
+服务之间的通信框架：Dubbo (RPC)
+服务注册发现中心：Zookeeper
+数据库：Mysql
+数据库分片框架：Mycat
+基础设施平台：Docker</p>
+</blockquote>
+<h3>系统架构</h3>
+<p>分布式主从架构部署模式，事务管理服务、转入服务、转出服务都注册到Zookeeper，并且服务分为主从节点，对外只有主节点提供服务。当主节点出现异常时，从节点选主成为新的主节点对外提供服务。详情如下图所示：</p>
+<p><img alt="分布式主从架构部署" src="/images/distributed-system/tcc-master-slave-architecture.png"></p>
+<p>集群架构部署模式，事务管理服务、转入服务、转出服务以集群方式注册到Zookeeper，同时有多个节点对外提供服务。任何一个服务的某个节点出现异常，对系统无影响。服务之间应用简单的负载均衡算法完成集成。详情如下图所示：</p>
+<p><img alt="集群架构部署" src="/images/distributed-system/tcc-cluster-architecture.png"></p>
+<h3>TCC交互流程</h3>
+<p><img alt="TCC交互流程" src="/images/distributed-system/tcc-flow.png"></p>
+<h4>流程介绍：</h4>
+<p>由于事务管理服务、转入服务、转出服务是分布式主从架构或者集群架构的部署模式，可以保障服务之间的重试是可以立即恢复之前的操作，且所有服务都是幂等的。</p>
+<h4>TransactionManager：</h4>
+<ol>
+<li>TRY阶段，接收客户端发起的转账请求，在数据库记录交易信息，并标记为TRY状态，然后通知TransferOut服务和TransferIn服务开启TRY流程</li>
+<li>当收到【8】和【13】的消息都是SUCCESS则进入CONFIRM阶段，否则进入CANCEL阶段</li>
+<li>CONFIRM阶段，通知TransferOut服务和TransferIn服务进入CONFIRM阶段，然后将交易信息更新为CONFIRM状态并返回SUCCESS</li>
+<li>消息【17】和【21】只返回SUCCESS的原因是有重试机制，一直重试直到返回SUCCESS才结束</li>
+<li>CANCEL阶段，先通知TransferOut服务和TransferIn服务进入CANCEL阶段，然后将交易信息更新为CANCEL状态并返回FAILED</li>
+<li>消息【27】和【31】只返回SUCCESS的原因是有重试机制，一直重试直到返回SUCCESS才结束</li>
+<li>CONFIRM阶段和CANCEL阶段是可以异步化的，也就是只要TRY阶段结束就可以将结果返回给客户端，但是当CONFIRM或者CANCEL阶段在异步化过程中出现异常时，尤其是CANCEL阶段，则全局数据就会出现不一致，且恢复过程非常的困难，因此本示例采取同步的方式处理CONFIRM和CANCEL阶段</li>
+</ol>
+<h4>TransferOut：</h4>
+<ol>
+<li>TRY阶段，先根据用户ID和事务ID获取全局锁，该全局锁是TransferOut服务和TransferIn服务共享，然后执行【6】和【7】</li>
+<li>操作【5】将获取全局锁，只有获取了全局锁才会执行后续的流程，同一个用户的同一笔交易记录可以重复获取全局锁</li>
+<li>操作【6】将备份当前用户账户数据在执行前和执行后的状态</li>
+<li>操作【6】和【7】属于同一个本地事务，任何一个失败，数据都会回滚并返回异常信息</li>
+<li>CONFIRM阶段，更新备份数据的状态，并且释放全局锁</li>
+<li>操作【15】和【16】是幂等的，允许无限次重试</li>
+<li>操作【15】和【16】属于同一个本地逻辑事务中，任何一个失败，数据都会回滚并返回异常信息</li>
+<li>CANCEL阶段，用备份数据还原用户账户记录，并更新状态和释放全局锁</li>
+<li>操作【25】和【26】是幂等的，允许无限次重试</li>
+<li>操作【25】和【26】属于同一个本地逻辑事务中，任何一个失败，数据都会回滚并返回异常信息</li>
+</ol>
+<h4>TransferIn：</h4>
+<ol>
+<li>TRY阶段，先根据用户ID和事务ID获取全局锁，该全局锁是TransferOut服务和TransferIn服务共享，然后执行【11】和【12】</li>
+<li>操作【10】将获取全局锁，只有获取了全局锁才会执行后续的流程，同一个用户的同一笔交易记录可以重复获取全局锁</li>
+<li>操作【11】将备份当前用户账户数据在执行前和执行后的状态</li>
+<li>操作【11】和【12】属于同一个本地事务，任何一个失败，数据都会回滚并返回异常信息</li>
+<li>CONFIRM阶段，更新备份数据的状态，并且释放全局锁</li>
+<li>操作【19】和【20】是幂等的，允许无限次重试</li>
+<li>操作【19】和【20】属于同一个本地逻辑事务中，任何一个失败，数据都会回滚并返回异常信息</li>
+<li>CANCEL阶段，用备份数据还原用户账户记录，并更新状态和释放全局锁</li>
+<li>操作【29】和【30】是幂等的，允许无限次重试</li>
+<li>操作【29】和【30】属于同一个本地逻辑事务中，任何一个失败，数据都会回滚并返回异常信息</li>
+</ol>
+<h4>异常分析：</h4>
+<ol>
+<li>异常发生在【3】之后，【14】或【24】之前，返回超时，交易记录处于TRY状态，TransferOut服务和TransferIn服务用户数据状态不确定</li>
+<li>客户端发起重试，查询到交易记录为TRY状态，重启TRY阶段流程，【最终全局数据一致】</li>
+<li>异常发生在【14】或【24】之后，【22】或【32】之前，返回超时，交易记录处理TRY状态，TransferOut服务用户数据状态不确定，TransferIn服务用户数据状态不确定</li>
+<li>客户端发起重试，查询到交易记录为TRY状态，重启TRY阶段流程，【最终全局数据一致】</li>
+<li>异常发生在【22】或【32】之后，返回超时，【全局数据一致】，处于CONFIRM或CANCEL状态</li>
+<li>客户端发起重试，直接返回SUCCESS或FAILED</li>
+<li>异常发生在TransferOut服务或TransferIn服务内部，不影响全局数据一致性</li>
+<li>TRY阶段，TransactionManager会决定进入CANCEL阶段</li>
+<li>CONFIRM或CANCEL阶段，TransactionManager会一直重试，直到返回正常结果</li>
+</ol>
+<h3>总结</h3>
+<p>上述过程描述了一个详细的TCC流程，具体的代码可以在这里下载<a href="https://github.com/cqupt-gsy/distributed-transaction">distributed-transaction</a>。</p>
+<p>本示例以资金安全为第一优先级，很多能够异步化的操作都改成了同步操作，因为异步化虽然对性能有提高，但是当服务在进行异步化操作的过程中一旦出现异常，数据状态的恢复比较麻烦，并且异步化也不会带来更高的性能收益。（性能的主要提升在于TCC的过程没有在资源层加锁，用户A进行转账时，其他用户是不会被锁住，也可以同时进行转账操作）</p>
+<p>与此同时，本示例在进行转账过程时，需要根据用户ID和交易号获取全局锁，也就是说同一个用户一次只能进行一次转账。这样做的目的是保障在CANCEL阶段，用户的数据不会出现误差，能够正常回滚用户数据 <em>（大家可以思考下，如果没有全局锁，CANCEL阶段会发生什么？）</em>。但是这种情况，对于高频率的转账账户是一个比较大的挑战，所以我们可以继续思考，如何对其进行优化。</p>
+<p><em>欢迎大家在评论区讨论各种分布式系统相关的内容。</em></p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=TCC&amp;url=https://cqupt-gsy.github.io/2020/02/TCC.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://cqupt-gsy.github.io/2020/02/TCC.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://cqupt-gsy.github.io/2020/02/TCC.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://cqupt-gsy.github.io/tag/distributed-system">distributed system</a><a href="https://cqupt-gsy.github.io/tag/distributed-transaction">distributed transaction</a><a href="https://cqupt-gsy.github.io/tag/tcc">TCC</a>                </aside>
+
+                <div class="clear"></div>
+
+                <aside class="post-author">
+
+
+                        <figure class="post-author-avatar">
+                            <img src="https://cqupt-gsy.github.io/favicon.ico" alt="Apprentice" />
+                        </figure>
+                    <div class="post-author-bio">
+                        <h4 class="post-author-name"><a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a></h4>
+                            <p class="post-author-about">聚焦科技、热衷实践、记录不平凡的技术生活</p>
+                            <span class="post-author-location"><i class="ic ic-location"></i> China</span>
+                            <span class="post-author-website"><a href="mailto:gaosy.work@gmail.com"><i class="ic ic-link"></i> Website</a></span>
+                        <!-- Social linkes in alphabet order. -->
+                            <span class="post-author-github"><a target="_blank" href="https://github.com/cqupt-gsy"><i class="ic ic-link"></i> GitHub</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </aside>
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'apprentice-blog';
+                    var disqus_shortname = 'apprentice-blog';
+                    var disqus_identifier = '/2020/02/TCC.html';
+                    var disqus_url = 'https://cqupt-gsy.github.io/2020/02/TCC.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/2020/02/TCC.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>
+                </section>
+
+                <aside class="post-nav">
+                    <a class="post-nav-prev" href="https://cqupt-gsy.github.io/2020/01/performance.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Java后端性能优化--持续更新</h2>
+                            <p class="post-nav-excerpt">应用程序的性能问题是后端开发的老大难问题，本文记录实际项目中碰到的性能问题，以及相关的解决思路，长期更新</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cqupt-gsy.github.io/theme/js/script.js"></script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208599-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-153208599-1', { 'anonymize_ip': true });
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'apprentice-blog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

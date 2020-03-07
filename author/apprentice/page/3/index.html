@@ -8,7 +8,7 @@
 
   <meta name="google-site-verification" content="GTo_mpNjSHa46yUCksCf_wo4KzjaAdD45koZAN4bpPw">
 
-  <title>Apprentice - Tag distributed transaction</title>
+  <title>Apprentice - Articles by Apprentice</title>
 
 
   <meta name="HandheldFriendly" content="True" />
@@ -54,7 +54,7 @@
 </nav>
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header id="blog-header" class="has-cover">
+    <header id="blog-header" >
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
@@ -64,11 +64,29 @@
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">Tag distributed transaction</h1>
-        <span class="blog-description">Posts: 2</span>
-          <div class="blog-cover cover" style="background-image: url('https://cqupt-gsy.github.io/images/header-cover/home-bg.jpg')">
       </div>
     </header>
+
+    <section id="blog-author"  >
+        <div class="inner">
+            <aside class="post-author">
+                <figure class="post-author-avatar">
+                    <img src="https://cqupt-gsy.github.io/favicon.ico" alt="Apprentice" />
+                </figure>
+                <div class="post-author-bio">
+                    <h4 class="post-author-name"><a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a></h4>
+                        <p class="post-author-about">聚焦科技、热衷实践、记录不平凡的技术生活</p>
+                        <span class="post-author-location"><i class="ic ic-location"></i> China</span>
+                        <span class="post-author-website"><a href="mailto:gaosy.work@gmail.com"><i class="ic ic-link"></i> Website</a></span>
+                    <!-- Social linkes in alphabet order. -->
+                        <span class="post-author-github"><a target="_blank" href="https://github.com/cqupt-gsy"><i class="ic ic-link"></i> GitHub</a></span>
+                        <span class="post-author-stats"><i class="ic ic-posts"></i> 9  posts </span>
+                </div>
+                <div class="clear"></div>
+            </aside>
+        </div>
+    </section>
+
 
   <section id="wrapper">
     <a class="hidden-close"></a>
@@ -78,7 +96,8 @@
     <div class="extra-pagination">
 <nav class="pagination" role="pagination">
   <div class="inner">
-    <span class="pagination-info">Page 1 / 1</span>
+    <a class="pagination-next" href="https://cqupt-gsy.github.io/author/apprentice/page/2/"><i class="ic ic-arrow-left"></i> <span class="pagination-label">Newer Posts</span></a>
+    <span class="pagination-info">Page 3 / 3</span>
     <div class="clear"></div>
   </div>
 </nav>
@@ -87,49 +106,29 @@
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="https://cqupt-gsy.github.io/2020/02/TCC.html" rel="bookmark" title="Permalink to TCC">TCC</a>
+                <h2 class="post-title"><a href="https://cqupt-gsy.github.io/2019/11/beginning.html" rel="bookmark" title="Permalink to 分布式系统-缘起">分布式系统-缘起</a>
                 </h2>
                 <span class="post-meta">
                         <a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a>
-                     | <time datetime="27 Feb 2020">27 Feb 2020</time>
+                     | <time datetime="23 Nov 2019">23 Nov 2019</time>
                 </span>
                 <div class="clear"></div>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        本文以TCC为理论依据，实现分布式转账功能，系统由事务管理服务、转出服务和转入服务构成。基本流程为事务管理服务记录转账交易记录，然后通过调用转出服务完成扣钱功能，调用转入服务完成加钱功能，保证事务管理服务、转出服务、转入服务中的数据状态最终一致。
+                        大家都知道，分布式系统提高了我们计算系统的计算能力，让更多的不可能变为了可能。但是它是如何做到这些，以及我们为什么要设计分布式系统，分布式系统的核心是什么，这些问题并不是很好的被大家所认知，所以本系列文章尝试用通俗易懂的语言，给想要了解分布式系统的各位一个简单明了的介绍。
                     </p>
                 </section>
 <p>
-  <a data-disqus-identifier="/2020/02/TCC.html" href="https://cqupt-gsy.github.io/2020/02/TCC.html#disqus_thread">comments</a>
-</p>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="https://cqupt-gsy.github.io/2020/01/distributed-transactions.html" rel="bookmark" title="Permalink to 分布式系统-分布式事务">分布式系统-分布式事务</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="https://cqupt-gsy.github.io/author/apprentice">Apprentice</a>
-                     | <time datetime="06 Jan 2020">06 Jan 2020</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        随着系统服务的分布式化，底层的数据也会被对应地分散存储，甚至在更为极端的微服务设计中，一个服务要求对应一个数据库，完全将数据分布式化存储。这种架构设计给系统带来了灵活性和持续可用性的同时，也造成了一定的业务复杂性，其中最重要的一个问题就是数据一致性的保障。因此，本文通过引入分布式事务的相关理论来介绍如何解决分布式系统中的数据一致性问题。
-                    </p>
-                </section>
-<p>
-  <a data-disqus-identifier="/2020/01/distributed-transactions.html" href="https://cqupt-gsy.github.io/2020/01/distributed-transactions.html#disqus_thread">comments</a>
+  <a data-disqus-identifier="/2019/11/beginning.html" href="https://cqupt-gsy.github.io/2019/11/beginning.html#disqus_thread">comments</a>
 </p>
             </div>
         </article>
 
 <nav class="pagination" role="pagination">
   <div class="inner">
-    <span class="pagination-info">Page 1 / 1</span>
+    <a class="pagination-next" href="https://cqupt-gsy.github.io/author/apprentice/page/2/"><i class="ic ic-arrow-left"></i> <span class="pagination-label">Newer Posts</span></a>
+    <span class="pagination-info">Page 3 / 3</span>
     <div class="clear"></div>
   </div>
 </nav>
